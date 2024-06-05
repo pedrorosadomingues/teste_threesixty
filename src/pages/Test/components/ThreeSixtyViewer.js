@@ -12,11 +12,21 @@ const ThreeSixtyViewer = () => {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(window.devicePixelRatio); // Ajustar para a resolução da tela
     mountRef.current.appendChild(renderer.domElement);
 
-    // Add OrbitControls
+    // Configuração de correção de gama
+    renderer.gammaInput = true;
+    renderer.gammaOutput = true;
+    renderer.outputEncoding = THREE.sRGBEncoding;
+
+    // Configuração do mapeamento de tons e exposição
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+
+    // Adicionar OrbitControls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
 
@@ -25,6 +35,9 @@ const ThreeSixtyViewer = () => {
 
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load('/OneToOne/Banheiro_Standard.jpg', (texture) => {
+      texture.encoding = THREE.sRGBEncoding; // Garantir a correção de cor da textura
+      texture.minFilter = THREE.LinearFilter;
+      texture.magFilter = THREE.LinearFilter;
       const material = new THREE.MeshBasicMaterial({ map: texture });
       const mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
@@ -34,17 +47,28 @@ const ThreeSixtyViewer = () => {
 
     const animate = () => {
       requestAnimationFrame(animate);
-      controls.update(); // Update controls
+      controls.update();
       renderer.render(scene, camera);
     };
     animate();
 
+    // Função para lidar com redimensionamento da janela
+    const handleResize = () => {
+      const width = mountRef.current.clientWidth;
+      const height = mountRef.current.clientHeight;
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    };
+    window.addEventListener('resize', handleResize);
+
     return () => {
       mountRef.current.removeChild(renderer.domElement);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  return <div ref={mountRef} style={{ width: '100vh', height: '100vh' }} />;
+  return <div ref={mountRef} style={{ width: '100vw', height: '100vh' }} />;
 };
 
 export default ThreeSixtyViewer;
