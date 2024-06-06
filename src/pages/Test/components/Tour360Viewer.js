@@ -57,7 +57,7 @@ function Tour360Viewer() {
     renderer.gammaOutput = true;
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = -0.5;
+    renderer.toneMappingExposure = -0.25;
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
