@@ -20,22 +20,22 @@ const ThreeSixtyViewer = () => {
     // Configuração de correção de gama
     renderer.gammaInput = true;
     renderer.gammaOutput = true;
-    renderer.outputEncoding = THREE.sRGBEncoding;
+    // renderer.outputEncoding = THREE.sRGBEncoding;
 
     // Configuração do mapeamento de tons e exposição
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.0;
+    renderer.toneMappingExposure = -0.25;
 
     // Adicionar OrbitControls
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableZoom = true;
+    controls.enableZoom = false;
 
     const geometry = new THREE.SphereGeometry(500, 60, 40);
     geometry.scale(-1, 1, 1);
 
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load('/OneToOne/Banheiro_Standard.jpg', (texture) => {
-      texture.encoding = THREE.sRGBEncoding; // Garantir a correção de cor da textura
+    textureLoader.load('/OneToOne/Chale_Standard.jpg', (texture) => {
+      // texture.encoding = THREE.sRGBEncoding; // Garantir a correção de cor da textura
       texture.minFilter = THREE.LinearFilter;
       texture.magFilter = THREE.LinearFilter;
       const material = new THREE.MeshBasicMaterial({ map: texture });
@@ -43,7 +43,7 @@ const ThreeSixtyViewer = () => {
       scene.add(mesh);
     });
 
-    camera.position.set(0, 0, 0.1);
+    camera.position.set(0, 0, 190);
 
     const animate = () => {
       requestAnimationFrame(animate);

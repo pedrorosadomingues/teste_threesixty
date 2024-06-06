@@ -5,8 +5,8 @@ import Tour360Viewer from "../pages/Test/components/Tour360Viewer";
 export default function Home() {
   return (
     <main className="flex items-center justfy-center">  
-        {/* <ThreeSixtyViewer /> */}
-        <Tour360Viewer />
+        <ThreeSixtyViewer />
+        {/* <Tour360Viewer /> */}
     </main>
   );
 }
