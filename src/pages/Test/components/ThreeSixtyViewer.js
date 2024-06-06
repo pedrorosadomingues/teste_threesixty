@@ -30,7 +30,7 @@ const ThreeSixtyViewer = () => {
     // Adicionar OrbitControls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = false;
-    controls.rotateSpeed = -0.2;
+    controls.rotateSpeed = -0.1;
 
     const geometry = new THREE.SphereGeometry(500, 60, 40);
     geometry.scale(-1, 1, 1);
