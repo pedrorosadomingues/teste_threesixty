@@ -57,10 +57,10 @@ function Tour360Viewer() {
     renderer.gammaOutput = true;
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = -0.25;
+    renderer.toneMappingExposure = -0.35;
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableZoom = true;
+    controls.enableZoom = false;
 
     const geometry = new THREE.SphereGeometry(500, 60, 40);
     geometry.scale(-1, 1, 1);
@@ -129,7 +129,7 @@ function Tour360Viewer() {
 
     document.addEventListener("mousedown", onDocumentMouseDown, false);
 
-    camera.position.set(0, 0, 0.1);
+    camera.position.set(0, 0, 200);
 
     const animate = () => {
       requestAnimationFrame(animate);
