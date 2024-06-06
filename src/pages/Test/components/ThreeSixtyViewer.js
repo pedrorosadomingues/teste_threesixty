@@ -25,12 +25,12 @@ const ThreeSixtyViewer = () => {
 
     // Configuração do mapeamento de tons e exposição
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = -0.2;
+    renderer.toneMappingExposure = -0.22;
 
     // Adicionar OrbitControls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = false;
-    controls.rotateSpeed = -1.5;
+    controls.rotateSpeed = -10;
 
     const geometry = new THREE.SphereGeometry(500, 60, 40);
     geometry.scale(-1, 1, 1);
@@ -45,7 +45,7 @@ const ThreeSixtyViewer = () => {
       scene.add(mesh);
     });
 
-    camera.position.set(0, 0, 250);
+    camera.position.set(0, 0, 400);
 
     const animate = () => {
       requestAnimationFrame(animate);
