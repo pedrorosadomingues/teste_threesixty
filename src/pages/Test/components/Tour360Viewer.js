@@ -129,7 +129,7 @@ function Tour360Viewer() {
 
     document.addEventListener("mousedown", onDocumentMouseDown, false);
 
-    camera.position.set(0, 0, 200);
+    camera.position.set(0, 0, 190);
 
     const animate = () => {
       requestAnimationFrame(animate);
